@@ -29,7 +29,7 @@ public class CardGame {
                 } else {
                     player2.insertLast(fullDeck.get(i));
                 }
-            }////
+            }
 
             // Game rounds: each player plays top card
             int round = 1;
