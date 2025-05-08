@@ -1,82 +1,78 @@
 
-public class LinkList
-{
-	private Link first;            // ref to first link on list
+// File: LinkedList.java
+// ------- LinkedList Class -------
+// Implements a simple singly-linked list for Card objects
+public class LinkedList {
+    private Link first; // head of list (top of deck)
 
-	//-------------------------------------------------------------
-	public LinkList()              // constructor
-	{
-		first = null;               // no links on list yet
-	}
-	//-------------------------------------------------------------
-	public void insertFirst(Card card)
-	{                           // make new link
-		Link newLink = new Link(card);
-		newLink.next = first;       // it points to old first link
-		first = newLink;            // now first points to this
-	}
-	public void add(Card card)
-	{                           // make new link
-		Link newLink = new Link(card);
-		newLink.next = first;       // it points to old first link
-		first = newLink;            // now first points to this
-	}
-	//-------------------------------------------------------------
-	public Link find(Card cardToFind)      // find link with given key
-	{                           // (assumes non-empty list)
-		Link current = first;              // start at 'first'
-		while(!current.equals(cardToFind))        // while no match,
-		{
-			if(current.next == null)        // if end of list,
-				return null;                 // didn't find it
-			else                            // not end of list,
-				current = current.next;      // go to next link
-		}
-		return current;                    // found it
-	}
-	//-------------------------------------------------------------
-	public Link delete(Card cardToFind)    // delete link with given key
-	{                           // (assumes non-empty list)
-		Link current = first;              // search for link
-		Link previous = first;
-		while(!current.equals(cardToFind))
-		{
-			if(!current.equals(cardToFind))
-				return null;                 // didn't find it
-			else
-			{
-				previous = current;          // go to next link
-				current = current.next;
-			}
-		}                               // found it
-		if(current.equals(cardToFind))               // if first link,
-			first = first.next;             //    change first
-		else                               // otherwise,
-			previous.next = current.next;   //    bypass it
-		return current;
-	}
-	//-------------------------------------------------------------
-	public void displayList()      // display the list
-	{
-		System.out.print("List (first-->last): ");
-		Link current = first;       // start at beginning of list
-		while(current != null)      // until end of list,
-		{
-			current.displayLink();   // print data
-			current = current.next;  // move to next link
-		}
-		System.out.println("");
-	}
-	//-------------------------------------------------------------
+    /**
+     * Initialize an empty list.
+     */
+    public LinkedList() {
+        first = null;
+    }
 
-	//-------------------------------------------------------------
-	public Card getFirst()    // delete link with given key
-	{                           // (assumes non-empty list)
-		Link current = first;              // search for link
-		first = first.next;             //    change first
-		return current.cardLink;
-	}
+    /**
+     * Check if list has no nodes.
+     * @return true if empty, false otherwise
+     */
+    public boolean isEmpty() {
+        return first == null;
+    }
 
+    /**
+     * Add a card at the front (top) of the list.
+     * @param card Card to insert
+     */
+    public void insertFirst(Card card) {
+        Link newNode = new Link(card);
+        newNode.next = first; // link new node to old head
+        first = newNode;      // update head to new node
+    }
+
+    /**
+     * Add a card at the end (bottom) of the list.
+     * @param card Card to insert
+     */
+    public void insertLast(Card card) {
+        if (isEmpty()) {
+            insertFirst(card); // empty list: same as insertFirst
+            return;
+        }
+        Link current = first;
+        // traverse until the last node
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = new Link(card); // append new node
+    }
+
+    /**
+     * Remove and return the first card (top) from the list.
+     * @return removed Card, or null if list was empty
+     */
+    public Card removeFirst() {
+        if (isEmpty()) {
+            return null; // nothing to remove
+        }
+        Card temp = first.card; // save card to return
+        first = first.next;     // head moves to next node
+        return temp;
+    }
+
+    /**
+     * Count how many cards are in the list.
+     * @return number of nodes
+     */
+    public int size() {
+        int count = 0;
+        Link current = first;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
 }  // end class LinkList
 ////////////////////////////////////////////////////////////////
 /*class LinkedLists

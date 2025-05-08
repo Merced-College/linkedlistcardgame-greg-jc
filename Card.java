@@ -1,91 +1,44 @@
-//package cardGame;
-
+// File: Card.java
+// ------- Card Class -------
+// Stores information about a single playing card used in the game.
 public class Card {
+    // The suit of this card (e.g., "heart", "diamond")
+    private String suit;
+    // The face name of this card (e.g., "ace", "two", "king")
+    private String name;
+    // Numeric value for game comparisons (higher wins)
+    private int value;
+    // Filename for card image (not used in console version)
+    private String pic;
 
-    // Instance variables
-    private String cardSuit;
-    private String cardName;
-    private int cardValue;
-    private String cardPic;
-
-    // Default constructor
-    public Card() {
-        cardName = "King";
-        cardValue = 10; // Corrected this from a string to an int
-    }
-
-    // Non-default constructor
-    public Card(String name, int value) {
-        cardName = name;
-        cardValue = value;
-    }
-
-    // Constructor with all attributes
+    /**
+     * Builds a card with specified suit, name, value, and image file.
+     * @param suit  suit of card (heart, diamond, club, spade)
+     * @param name  face name (two, jack, ace, etc.)
+     * @param value numeric value used for comparing cards
+     * @param pic   image filename (e.g. "ah.gif")
+     */
     public Card(String suit, String name, int value, String pic) {
-        cardSuit = suit;
-        cardName = name;
-        cardValue = value;
-        cardPic = pic;
+        this.suit  = suit;
+        this.name  = name;
+        this.value = value;
+        this.pic   = pic;
     }
 
-    // Getter methods
-    public String getCardName() {
-        return cardName;
+    /**
+     * Gets the numeric value of the card.
+     * @return value for comparing cards in a round
+     */
+    public int getValue() {
+        return value;
     }
 
-    public int getCardValue() {
-        return cardValue;
-    }
-
-    public String getCardSuit() {
-        return cardSuit;
-    }
-
-    public String getCardPic() {
-        return cardPic;
-    }
-
-    // Setter methods
-    public void setCardName(String newCardName) {
-        cardName = newCardName;
-    }
-
-    public void setCardValue(int newCardValue) {
-        cardValue = newCardValue;
-    }
-
-    public void setCardSuit(String newCardSuit) {
-        cardSuit = newCardSuit;
-    }
-
-    public void setCardPic(String newCardPic) {
-        cardPic = newCardPic;
-    }
-
-    // Method to get combined card values
-    public String getCardValues() {
-        return cardName + " " + cardValue;
-    }
-
-    // Equals method to compare two cards
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true; // Same object reference
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false; // Null or different class
-        }
-        Card otherCard = (Card) obj;
-        return cardValue == otherCard.cardValue && 
-               cardName.equals(otherCard.cardName) && 
-               cardSuit.equals(otherCard.cardSuit) && 
-               cardPic.equals(otherCard.cardPic);
-    }
-
-    // toString method for printing the card
+    /**
+     * Provides a text description of the card for console output.
+     * @return formatted string like "ace of heart (value=11)"
+     */
     @Override
     public String toString() {
-        return cardName + " of " + cardSuit + " (Value: " + cardValue + ", Picture: " + cardPic + ")";
+        return name + " of " + suit + " (value=" + value + ")";
     }
 }
